@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_report_by_customer"
+                string="By Customer"
+                model="purchase.customer.report"
+                report_type="qweb-pdf"
+                file="purchase_report.purchase_report_view"
+                name="purchase_report.purchase_report_view"
+        />
+
+        <report
+                id="action_report_by_customer_excel"
+                string="By Customer_excel"
+                model="purchase.customer.report"
+                report_type="xlsx"
+                file="purchase_report.purchase_report_view_xlsx"
+                name="purchase_report.purchase_report_view_xlsx"
+        />
+    </data>
+</odoo>

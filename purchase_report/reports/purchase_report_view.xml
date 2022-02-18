@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_report_view">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div>
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <center>
+                            <b>
+                                <h3>Purchase Report By Customer</h3>
+                            </b>
+                        </center>
+                        <center>
+                            <b>
+                                <span t-esc="start_date" t-options='{"widget": "date"}'/>
+                                To
+                                <span t-esc="end_date" t-options='{"widget": "date"}'/>
+                            </b>
+                        </center>
+                        <br/>
+                        <t t-foreach="data.keys()" t-as="user">
+                            <br/>
+                            <center>
+                                <b  class="customer">
+                                    <span>Customer :</span>
+                                    <span t-esc="user"/>
+                                </b>
+                            </center>
+                            <br/>
+                            
+                       
+                            <!--<table class="table table-condensed">-->
+                            <table class="table table-bordered mt32">
+                                <thead>
+                                    <tr>
+                                    
+                                        <th class="text-center">Company</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Order</th>
+                                        <th class="text-center">Untaxed_Amount</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center">Tax</th>
+                                    </tr>
+                                </thead>
+                                    <t t-set="total_sum" t-value="0"/>
+                                    <t t-set="total" t-value="0"/>
+                                    <t t-set="total1" t-value="0"/>
+                                    <t t-set="counter" t-value="0"/>
+                                
+                                    <tr t-foreach="data[user]" t-as="A">
+                                        <td class="text-center">
+                                            <span t-esc="A[0]" />
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-esc="A[1]" t-options='{"widget": "date"}'/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-esc="A[2]"/>
+                                            <t t-set="counter" t-value="counter + 1"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'%.2f'% A[3]"/>
+                                            <t t-set="total_sum" t-value="total_sum + A[3]"/>
+                                        
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'%.2f'% A[4]"/>
+                                            <t t-set="total" t-value="total + A[4]"/>
+                                        
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'%.2f'% A[5]"/>
+                                            <t t-set="total1" t-value="total1 + A[5]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">
+                                        </td>
+                                        <td class="text-center">
+                                            <b>Total</b>
+                                        </td>
+                                        <td class="text-center">
+                                            <b><span t-esc="counter"/></b>
+                                        </td>
+                                        <td class="text-right">
+                                            <b><span t-esc="'%.2f'% total_sum"/></b>
+            
+                                        </td>
+                                        <td class="text-right"> 
+                                            <b><span t-esc=" '%.2f'% total"/></b>
+                                        </td>
+                                        <td class="text-right">
+                                            <b><span t-esc="' %.2f'% total1"/></b>
+                                        </td>
+                                    </tr>
+                            </table>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
